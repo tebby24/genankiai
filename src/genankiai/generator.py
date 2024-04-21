@@ -60,6 +60,8 @@ body {
         date = datetime.now().strftime("%Y-%m-%d")
         output_filename = self.deck_info["name"] + "_" + date + ".apkg"
         output_filepath = os.path.join(output_dir, output_filename)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
         package.write_to_file(output_filepath)
 
     def get_model(self):
