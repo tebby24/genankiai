@@ -37,7 +37,6 @@ body {
 }
 
 .example {
-	font-size: .75rem;
 	font-style: italic;
 }
 """
@@ -165,4 +164,4 @@ body {
 
     def to_snake_case(self, string):
         """Convert a string to snake_case"""
-        return string.lower().replace(" ", "_")
+        return string.lower().replace(" ", "_").replace(".", "")

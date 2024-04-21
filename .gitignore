@@ -11,3 +11,5 @@ output/*
 tests/output/*
 !tests/output/
 
+terms.txt
+
