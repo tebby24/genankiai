@@ -6,6 +6,42 @@ import genanki
 
 
 class Generator:
+    frontside_template = """
+<div class="term">{{Term}}</div>
+<div>{{Term Audio}}</div>
+"""
+    backside_template = """
+{{FrontSide}}
+<hr id="answer">
+<div class="definition">{{English Definition}}</div>
+<div class="translation">{{Native Language Translation}}</div><br>
+<div class="example">{{Example Sentence}}</div>
+<div>{{Example Sentence Audio}}</div>
+"""
+    style = """
+body {
+	display: block;
+	font-family: "Times New Roman"
+}
+
+.term {
+	font-size: 3rem;
+}
+
+.definition {
+
+}
+
+.translation {
+
+}
+
+.example {
+	font-size: .75rem;
+	font-style: italic;
+}
+"""
+
     def __init__(self, deck_info, openai_client):
         self.deck_info = deck_info
         self.openai_client = openai_client
@@ -22,20 +58,13 @@ class Generator:
         [deck.add_note(note) for note in notes]
         package = genanki.Package(deck)
         package.media_files = self.media_files
-        output_filename = self.deck_info["name"] + ".apkg"
+        date = datetime.now().strftime("%Y-%m-%d")
+        output_filename = self.deck_info["name"] + date + ".apkg"
         output_filepath = os.path.join(output_dir, output_filename)
         package.write_to_file(output_filepath)
 
     def get_model(self):
         """Generate a model for the deck"""
-        frontside = "{{Term}}<br>{{Term Audio}}"
-        backside = """
-            {{FrontSide}}
-            <hr id="answer">
-            {{English Definition}}<br>
-            {{Native Language Translation}}<br>
-            {{Example Sentence}}<br>
-            {{Example Sentence Audio}}"""
         model = genanki.Model(
             self.deck_info["model_id"],
             self.deck_info["name"] + " (Model)",
@@ -47,7 +76,14 @@ class Generator:
                 {"name": "Example Sentence"},
                 {"name": "Example Sentence Audio"},
             ],
-            templates=[{"name": "Card", "qfmt": frontside, "afmt": backside}],
+            templates=[
+                {
+                    "name": "Card",
+                    "qfmt": self.frontside_template,
+                    "afmt": self.backside_template,
+                }
+            ],
+            css=self.style,
         )
         return model
 
@@ -66,9 +102,7 @@ class Generator:
 
     def get_deck(self):
         """Generate a deck from the given terms"""
-        return genanki.Deck(
-            self.deck_info["deck_id"], self.deck_info["name"] + " (Deck)"
-        )
+        return genanki.Deck(self.deck_info["deck_id"], self.deck_info["name"])
 
     def get_tts(self, string):
         """Uses OpenAI API to convert input string into speech"""
