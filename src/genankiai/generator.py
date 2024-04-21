@@ -22,6 +22,9 @@ class Generator:
         [deck.add_note(note) for note in notes]
         package = genanki.Package(deck)
         package.media_files = self.media_files
+        output_filename = self.deck_info["name"] + ".apkg"
+        output_filepath = os.path.join(output_dir, output_filename)
+        package.write_to_file(output_filepath)
 
     def get_model(self):
         """Generate a model for the deck"""
@@ -69,6 +72,7 @@ class Generator:
 
     def get_tts(self, string):
         """Uses OpenAI API to convert input string into speech"""
+        print(f"get_tts({string})")
         filename = f"{self.to_snake_case(string)}.mp3"
         path = os.path.join("media", filename)
         response = self.openai_client.audio.speech.create(
@@ -82,6 +86,7 @@ class Generator:
 
     def get_english_definition(self, term):
         """Uses OpenAI API to generate an English definition of input term"""
+        print(f"get_english_definition({term})")
         response = self.openai_client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -89,13 +94,14 @@ class Generator:
                     "role": "system",
                     "content": "In this chat, you will act as a dictionary, providing simple definitions of English terms. I will provide you with a term, and you will give a simple definition and nothing else.",
                 },
-                {"role": "user", "content": "term"},
+                {"role": "user", "content": term},
             ],
         )
         return response.choices[0].message.content
 
     def get_translation(self, native_language, term):
         """Uses OpenAI API to generate a translation of input term"""
+        print(f"get_translation({native_language}, {term})")
         response = self.openai_client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -110,6 +116,7 @@ class Generator:
 
     def get_example_sentence(self, term):
         """Uses OpenAI API to generate an example sentence using input term"""
+        print(f"get_example_sentence({term})")
         response = self.openai_client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[

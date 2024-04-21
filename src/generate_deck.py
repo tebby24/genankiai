@@ -1,7 +1,6 @@
 import argparse
 import json
 import os
-import sys
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -38,10 +37,10 @@ def get_terms(terms_file):
 if __name__ == "__main__":
     args = parse_arguments()
     deck_info = get_deck_info(args.deck)
+    print("deck_info: ", deck_info)
     terms = get_terms(args.terms)
+    print("terms: ", terms)
     openai_client = OpenAI(api_key=openai_api_key)
     generator = Generator(deck_info, openai_client)
 
-    generator.generate_deck(
-        terms,
-    )
+    generator.generate_deck(terms, "output")
