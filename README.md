@@ -2,6 +2,8 @@
 
 This project is a Python application that generates Anki decks using OpenAI's GPT-3 model. It takes a deck JSON file and a terms TXT file as inputs and generates an Anki deck as output.
 
+![anki card example](images/anki_card_example.png)
+
 ## Getting Started
 
 ### Prerequisites
@@ -36,8 +38,8 @@ Create a deck json based of the following example. Generate unique id's for the 
 ```json
 {
     "name": "DeckName",
-    "deck_id": 0123456789,
-    "model_id": 0123456789,
+    "deck_id": 1234567890,
+    "model_id": 1234567890,
     "native_language": "Chinese"
 }
 ```
@@ -56,4 +58,8 @@ To generate an Anki deck, run the `generate_deck.py` script with the `-d` option
 python src/generate_deck.py -d path/to/deck.json -t path/to/terms.txt
 ```
 
-The generated Anki deck will be saved in the `output` directory.
+The generated Anki deck will be saved in the `output` directory. You can then import the resulting .apkg file into Anki.
+
+### Credits
+
+This project uses https://github.com/kerrickstaley/genanki
