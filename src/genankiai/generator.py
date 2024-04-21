@@ -59,7 +59,7 @@ body {
         package = genanki.Package(deck)
         package.media_files = self.media_files
         date = datetime.now().strftime("%Y-%m-%d")
-        output_filename = self.deck_info["name"] + date + ".apkg"
+        output_filename = self.deck_info["name"] + "_" + date + ".apkg"
         output_filepath = os.path.join(output_dir, output_filename)
         package.write_to_file(output_filepath)
 
@@ -126,7 +126,7 @@ body {
             messages=[
                 {
                     "role": "system",
-                    "content": "In this chat, you will act as a dictionary, providing simple definitions of English terms. I will provide you with a term, and you will give a simple definition and nothing else.",
+                    "content": "In this chat, you will act as a dictionary, providing simple definitions of English terms. I will provide you with a term, and you will give a simple definition and nothing else. Do not include the term in your definition.",
                 },
                 {"role": "user", "content": term},
             ],

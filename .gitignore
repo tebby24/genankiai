@@ -1,3 +1,13 @@
 .venv/*
 .env
 **/.DS_Store
+
+decks/*
+!decks/
+
+output/*
+!output/
+
+tests/output/*
+!tests/output/
+

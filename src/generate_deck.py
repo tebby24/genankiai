@@ -31,7 +31,7 @@ def get_deck_info(deck_json):
 
 def get_terms(terms_file):
     with open(terms_file, "r") as f:
-        return f.readlines()
+        return [line.strip() for line in f.readlines()]
 
 
 if __name__ == "__main__":

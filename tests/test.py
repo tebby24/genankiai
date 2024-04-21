@@ -2,13 +2,10 @@ import json
 import os
 import sys
 
-from openai import OpenAI
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 from dotenv import load_dotenv
 from openai import OpenAI
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.genankiai import Generator
 
 load_dotenv()
@@ -22,7 +19,7 @@ def get_deck_info(deck_json):
 
 def get_terms(terms_file):
     with open(terms_file, "r") as f:
-        return f.readlines()
+        return [line.strip() for line in f.readlines()]
 
 
 if __name__ == "__main__":
