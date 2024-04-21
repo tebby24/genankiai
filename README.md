@@ -5,22 +5,18 @@ It takes a deck JSON file and a terms TXT file as inputs and generates an Anki d
 
 ![anki card example](images/card_example.png)
 
-The resulting Anki cards include the following fields:
-Frontside:
+The resulting Anki cards include the following fields:\
+Frontside
 
-```
-term
-term audio
-```
+-   term
+-   term audio
 
-Backside:
+Backside
 
-```
-english definition
-native language translation
-example sentence
-example sentence audio
-```
+-   english definition
+-   native language translation
+-   example sentence
+-   example sentence audio
 
 ## Getting Started
 
