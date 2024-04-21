@@ -1,8 +1,26 @@
 # Anki Deck Generator
 
-This project is a Python application that generates Anki decks using OpenAI's GPT-3 model. It takes a deck JSON file and a terms TXT file as inputs and generates an Anki deck as output.
+This project is a Python application that generates Anki decks for language learning using OpenAI's GPT-3 model.
+It takes a deck JSON file and a terms TXT file as inputs and generates an Anki deck as output.
 
 ![anki card example](images/card_example.png)
+
+The resulting Anki cards include the following fields:
+Frontside:
+
+```
+term
+term audio
+```
+
+Backside:
+
+```
+english definition
+native language translation
+example sentence
+example sentence audio
+```
 
 ## Getting Started
 
