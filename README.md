@@ -6,17 +6,17 @@ It takes a deck JSON file and a terms TXT file as inputs and generates an Anki d
 ![anki card example](images/card_example.png)
 
 The resulting Anki cards include the following fields:\
-Frontside
+(Frontside)
 
--   term
--   term audio
+-   Term
+-   Term audio
 
-Backside
+(Backside)
 
--   english definition
--   native language translation
--   example sentence
--   example sentence audio
+-   English definition
+-   Native language translation
+-   Example sentence
+-   Example sentence audio
 
 ## Getting Started
 
