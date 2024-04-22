@@ -69,7 +69,7 @@ term 3
 To generate an Anki deck, run the `generate_deck.py` script with the `-d` option for the deck JSON file and the `-t` option for the terms TXT file:
 
 ```sh
-python src/generate_deck.py -d path/to/deck.json -t path/to/terms.txt
+python src/cli/generate_deck.py -d path/to/deck.json -t path/to/terms.txt
 ```
 
 The generated Anki deck will be saved in the `output` directory. You can then import the resulting .apkg file into Anki.

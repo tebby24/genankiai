@@ -1,6 +1,9 @@
 import argparse
 import json
 import os
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -43,4 +46,4 @@ if __name__ == "__main__":
     openai_client = OpenAI(api_key=openai_api_key)
     generator = Generator(deck_info, openai_client)
 
-    generator.generate_deck(terms, "output")
+    generator.generate_deck(terms)

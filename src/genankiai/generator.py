@@ -6,6 +6,10 @@ import genanki
 
 
 class Generator:
+
+    MEDIA_DIRECTORY = "media"
+    OUTPUT_DIRECTORY = "output"
+
     frontside_template = """
 <div class="term">{{Term}}</div>
 <div>{{Term Audio}}</div>
@@ -46,11 +50,16 @@ body {
         self.openai_client = openai_client
         self.media_files = []
 
-    def generate_deck(self, terms, output_dir):
+    def setup_directories(self):
+        """Create media and output directories if it does not exist"""
+        if not os.path.exists(self.MEDIA_DIRECTORY):
+            os.makedirs(self.MEDIA_DIRECTORY)
+        if not os.path.exists(self.OUTPUT_DIRECTORY):
+            os.makedirs(self.OUTPUT_DIRECTORY)
+
+    def generate_deck(self, terms):
         """
         generate a deck from given terms and write to the specified output path
-        terms (list[string]): a list of string terms
-        output_path (string): a filepath at which to write the .apkg file
         """
         notes = [self.get_note(term) for term in terms]
         deck = self.get_deck()
@@ -59,9 +68,7 @@ body {
         package.media_files = self.media_files
         date = datetime.now().strftime("%Y-%m-%d")
         output_filename = self.deck_info["name"] + "_" + date + ".apkg"
-        output_filepath = os.path.join(output_dir, output_filename)
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
+        output_filepath = os.path.join(self.OUTPUT_DIRECTORY, output_filename)
         package.write_to_file(output_filepath)
 
     def get_model(self):
