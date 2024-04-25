@@ -1,6 +1,7 @@
 # Anki Deck Generator
 
-This project is a Python application and CLI that generates Anki decks for English learners using OpenAI's GPT-3 and TTS models. \ \
+This project is a Python application and CLI that generates Anki decks for English learners using OpenAI's GPT-3 and TTS models.
+<br/><br/>
 I wrote this app so that I can quickly generate Anki flashcards for my English students.
 Once you create a deck using the CLI tool, you can generate .apkg files using the `generate` command and import them into Anki.
 Files generated under the same deck name (using the CLI) tool will be imported into Anki under the same (Anki) deck, essencially just adding new cards to that Anki deck.
