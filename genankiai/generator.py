@@ -8,7 +8,6 @@ import genanki
 class Generator:
 
     MEDIA_DIRECTORY = "media"
-    OUTPUT_DIRECTORY = "output"
 
     frontside_template = """
 <div class="term">{{Term}}</div>
@@ -45,17 +44,25 @@ body {
 }
 """
 
-    def __init__(self, deck_info, openai_client):
+    def __init__(
+        self,
+        deck_info,
+        openai_client,
+        output_directory="output",
+        media_directory="media",
+    ):
         self.deck_info = deck_info
         self.openai_client = openai_client
+        self.output_directory = output_directory
+        self.media_directory = media_directory
         self.media_files = []
 
     def setup_directories(self):
         """Create media and output directories if it does not exist"""
-        if not os.path.exists(self.MEDIA_DIRECTORY):
-            os.makedirs(self.MEDIA_DIRECTORY)
-        if not os.path.exists(self.OUTPUT_DIRECTORY):
-            os.makedirs(self.OUTPUT_DIRECTORY)
+        if not os.path.exists(self.media_directory):
+            os.makedirs(self.media_directory)
+        if not os.path.exists(self.output_directory):
+            os.makedirs(self.output_directory)
 
     def generate_deck(self, terms):
         """
@@ -68,7 +75,7 @@ body {
         package.media_files = self.media_files
         date = datetime.now().strftime("%Y-%m-%d")
         output_filename = self.deck_info["name"] + "_" + date + ".apkg"
-        output_filepath = os.path.join(self.OUTPUT_DIRECTORY, output_filename)
+        output_filepath = os.path.join(self.output_directory, output_filename)
         package.write_to_file(output_filepath)
 
     def get_model(self):
