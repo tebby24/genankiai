@@ -101,6 +101,9 @@ def new_deck(name, native_language):
     if deck_exists(name):
         print(f"Deck {name} already exists.")
         return
+    if " " in name:
+        print("Deck name cannot contain spaces.")
+        return
     deck_id = random.randrange(1 << 30, 1 << 31)
     model_id = random.randrange(1 << 30, 1 << 31)
     deck_info = {

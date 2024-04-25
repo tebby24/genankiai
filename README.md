@@ -1,7 +1,9 @@
 # Anki Deck Generator
 
-This project is a Python application that generates Anki decks for language learning using OpenAI's GPT-3 model.
-It takes a deck JSON file and a terms TXT file as inputs and generates an Anki deck as output.
+This project is a Python application and CLI that generates Anki decks for English learners using OpenAI's GPT-3 and TTS models.
+I wrote this app so that I can quickly generate Anki flashcards for my English students.
+Once you create a deck using the CLI tool, you can generate Anki decks using the `generate` command and import them into Anki.
+Files generated under the same deck name (using the CLI) tool will be imported into Anki under the same (Anki) deck, essencially just adding new cards to that Anki deck.
 
 ![anki card example](images/card_example.png)
 
@@ -47,32 +49,53 @@ echo "OPENAI_API_KEY=yourapikey" > .env
 
 ### Usage
 
-Create a deck json based of the following example. Generate unique id's for the `deck_id` and `model_id` by using `import random; random.randrange(1 << 30, 1 << 31)`
+Use the CLI by running `python cli.py`
+The CLI tool provides several commands to manage and generate Anki decks.
+You can modify the output output and decks directory used by the CLI by modifying the `settings.json` file.
 
-```json
-{
-    "name": "DeckName",
-    "deck_id": 1234567890,
-    "model_id": 1234567890,
-    "native_language": "Chinese"
-}
+### Creating a new deck
+
+To create a new deck, use the `newdeck` command.
+You need to provide the name of the deck and the native language (used for the translation field) of the deck's user.
+The deck name cannot include spaces.
+
+```bash
+python cli.py newdeck --name "my_deck" --native-language "Chinese"
 ```
 
-Create a txt file that contains terms you wish to generate cards for (one term per line)
+### Generating a deck
 
-```txt
-term 1
-term 2
-term 3
+To generate a deck, use the `generate` command. You need to provide the name of the deck.
+
+```bash
+python cli.py generate "my_deck"
 ```
 
-To generate an Anki deck, run the `generate_deck.py` script with the `-d` option for the deck JSON file and the `-t` option for the terms TXT file:
+### Listing all decks
 
-```sh
-python src/cli/generate_deck.py -d path/to/deck.json -t path/to/terms.txt
+To list all available decks, use the `listdecks` command.
+
+```bash
+python cli.py listdecks
 ```
 
-The generated Anki deck will be saved in the `output` directory. You can then import the resulting .apkg file into Anki.
+### Editing a deck
+
+To edit a deck's .json file, use the `editdeck` command. You need to provide the name of the deck.
+
+```bash
+python cli.py editdeck "my_deck"
+```
+
+### Deleting a deck
+
+To delete a deck, use the `deletedeck` command. You need to provide the name of the deck.
+
+```bash
+python cli.py deletedeck "my_deck"
+```
+
+Please replace `"My Deck"` and `"English"` with your actual deck name and native language.
 
 ### Credits
 
