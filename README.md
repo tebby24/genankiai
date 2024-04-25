@@ -48,7 +48,7 @@ pip install -r requirements.txt
 echo "OPENAI_API_KEY=yourapikey" > .env
 ```
 
-### Usage
+## Usage
 
 Use the CLI by running `python cli.py`
 The CLI tool provides several commands to manage and generate Anki decks.
@@ -71,6 +71,8 @@ To generate a deck, use the `generate` command. You need to provide the name of 
 ```bash
 python cli.py generate "my_deck"
 ```
+
+By default, the .apkg file will be saved to `~/Downloads`, but you can change this by modifying the `settings.json` file.
 
 ### Listing all decks
 
