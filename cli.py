@@ -61,6 +61,8 @@ def get_openai_client():
 def get_terms():
     """Get terms from the user by writing to a text file."""
     terms_file = "terms.txt"
+    with open(terms_file, "w") as f:
+        f.write("")
     subprocess.call([os.environ.get("EDITOR", "vi"), terms_file])
     with open(terms_file, "r") as f:
         user_input = f.read().strip()
